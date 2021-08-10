@@ -10,8 +10,12 @@ class Ac(BroadlinkDevice):
     def on(self):
         if self.should_update_power('on'):
             self.send_data(self.commands['on'])
+            return True
+        return False
 
 
     def off(self):
         if self.should_update_power('off'):
             self.send_data(self.commands['off'])
+            return True
+        return False
