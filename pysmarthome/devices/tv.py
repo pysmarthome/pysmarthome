@@ -32,17 +32,23 @@ class Tv(BroadlinkDevice):
 
     def mute(self):
         self.send_data(self.commands['mute'])
-        self.is_muted = not self.is_muted
+        self.set_state({ 'is_muted': not self.is_muted })
 
 
     def vol_up(self):
-        self.send_data(self.commands['vol_up'])
-        self.volume += 1
+        if self.volume < 100:
+            self.send_data(self.commands['vol_up'])
+            self.set_state({ 'volume': self.volume + 1 })
+            return True
+        return False
 
 
     def vol_down(self):
-        self.send_data(self.commands['vol_down'])
-        self.volume -= 1
+        if self.volume > 0:
+            self.send_data(self.commands['vol_down'])
+            self.set_state({ 'volume': self.volume - 1 })
+            return True
+        return False
 
 
     def get_init_power(self):
