@@ -41,7 +41,7 @@ class Tv(BroadlinkDevice):
 
 
     def vol_down(self):
-        self.send_data(self.commands['vol_up'])
+        self.send_data(self.commands['vol_down'])
         self.volume -= 1
 
 
