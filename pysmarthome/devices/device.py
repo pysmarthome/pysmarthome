@@ -66,19 +66,19 @@ class Device:
         return actions
 
 
-    def trigger_action(self, action_id):
+    def trigger_action(self, action_id, **params):
         try:
             actions = self.get_actions()
             if action_id in ['on', 'off', 'toggle']:
-                if self.should_update_power(action_id) and actions[action_id](self):
-                    state = self.get_power()
+                if self.should_update_power(action_id):
                     new_state = self.get_switch_power()
-                    self.on_power_changed(new_state)
+                    if actions[action_id](self):
+                        self.on_power_changed(new_state)
                     return True
                 else:
                     return False
             if action_id in actions:
-                actions[action_id](self)
+                actions[action_id](self, **params)
             return True
         except:
             return False
