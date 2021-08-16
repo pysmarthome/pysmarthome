@@ -1,3 +1,6 @@
+from ..utils import get_base_classes, get_methods_in
+
+
 class Device:
     def __init__(self, id='', power='off'):
         self.id = id
@@ -54,19 +57,12 @@ class Device:
 
 
     def get_actions(self):
-        def get_bases(cls):
-            r = [cls]
-            for b in cls.__bases__:
-                if b.__name__ != 'object':
-                    r.extend(get_bases(b))
-            return r
-        bases = get_bases(self.__class__)
+        bases = get_base_classes(self.__class__)
+        methods = get_methods_in(*bases)
         actions = {}
-        for b in bases:
-            funcs = [(key, f) for key, f in b.__dict__.items() if callable(f)]
-            for k, f in funcs:
-                if k not in actions:
-                    actions[k] = f
+        for k, f in methods:
+            if k not in actions:
+                actions[k] = f
         return actions
 
 
