@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
 from ..utils import get_base_classes, get_methods_in
 
 
-class Device:
+class Device(ABC):
     def __init__(self, id='', power='off'):
         self.id = id
         self.power = power
@@ -11,11 +12,13 @@ class Device:
         return self.id
 
 
+    @abstractmethod
     def on(self):
         # This function must return True | False
         pass
 
 
+    @abstractmethod
     def off(self):
         # This function must return True | False
         pass
