@@ -27,7 +27,7 @@ class GoveeLedStrip(Light):
 
 
     def get_color(self):
-        return self.dev.color
+        return str(self.dev.color)
 
 
     def set_color(self, rgb):
