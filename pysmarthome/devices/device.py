@@ -68,6 +68,10 @@ class Device(ABC):
     def controller(self, ctrl): self._controller = ctrl
 
 
+    def on_load(self, **data):
+        self.sync_state()
+
+
     def sync_state(self):
         # will execute getters of highest hierarchy class if they exist.
         # Its important to notice that the controllers must implement the getters
