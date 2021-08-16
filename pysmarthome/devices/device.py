@@ -68,6 +68,16 @@ class Device(ABC):
     def controller(self, ctrl): self._controller = ctrl
 
 
+    @classmethod
+    def load(cls, db, id, on_load_callback=lambda x: None):
+        dev = cls()
+        dev.model = dev.model_class.load(db, id)
+        on_load_callback(dev)
+        d = dev.model.to_dict()
+        dev.on_load(**d)
+        return dev
+
+
     def on_load(self, **data):
         self.sync_state()
 
