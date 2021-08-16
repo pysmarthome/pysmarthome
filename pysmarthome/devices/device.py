@@ -68,6 +68,19 @@ class Device(ABC):
     def controller(self, ctrl): self._controller = ctrl
 
 
+    def sync_state(self):
+        # will execute getters of highest hierarchy class if they exist.
+        # Its important to notice that the controllers must implement the getters
+        # with the 'get_' prefix
+        actions = self.get_actions()
+        state = {}
+        for k in self.model.state.schema['state']['schema'].keys():
+            getter_id = f'get_{k}'
+            if getter_id in actions:
+                state[k] = actions[getter_id](self)
+        self.set_state(**state)
+
+
 
 
     def update(self, **data):
