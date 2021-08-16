@@ -35,7 +35,10 @@ class GoveeLedStrip(Light):
 
 
     def get_brightness(self):
-        return self.dev.brightness
+        try:
+            return round(self.dev.brightness * 100)
+        except Exception as e:
+            print(e)
 
 
     def set_brightness(self):
