@@ -8,6 +8,7 @@ setup(
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
         'asyncio',
+        'boto3',
         'broadlink',
         'Cerberus',
         'flask',
