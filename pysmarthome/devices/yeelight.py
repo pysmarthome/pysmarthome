@@ -25,7 +25,7 @@ class Yeelight(Light):
 
     def get_brightness(self):
         properties = self.dev.get_properties()
-        return properties['current_brightness']
+        return int(properties['current_brightness'])
 
 
     def set_brightness(self):
