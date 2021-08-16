@@ -3,10 +3,8 @@ from .device import Device
 
 
 class SonoffDevice(Device):
-    def __init__(self, addr, api_key, **kwargs):
-        super().__init__(**kwargs)
+    def on_load(self, addr='', api_key='', **data):
         self.dev = sonoffreq.Sonoff(addr, api_key)
-
 
     def on(self):
         self.dev.switch('on')

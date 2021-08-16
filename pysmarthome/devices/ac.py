@@ -1,21 +1,19 @@
 from .broadlink import BroadlinkDevice
-
+from pysmarthome.models import AcModel
 
 class Ac(BroadlinkDevice):
-    def __init__(self, manager, temp=0, **kwargs):
-        super().__init__(manager, **kwargs)
-        self.temp = temp
+    model_class = AcModel
 
 
     def on(self):
         if self.should_update_power('on'):
-            self.send_data(self.commands['on'])
+            self.send_command('on')
             return True
         return False
 
 
     def off(self):
         if self.should_update_power('off'):
-            self.send_data(self.commands['off'])
+            self.send_command('off')
             return True
         return False

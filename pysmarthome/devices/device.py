@@ -1,15 +1,29 @@
 from abc import ABC, abstractmethod
 from ..utils import get_base_classes, get_methods_in
+from pysmarthome.models import DeviceModel
 
 
 class Device(ABC):
-    def __init__(self, id='', power='off'):
-        self.id = id
-        self.power = power
+    model_class = DeviceModel
+    controller_api = ''
 
 
-    def get_id(self):
-        return self.id
+    def __init__(self):
+        self.model = self.model_class()
+        self._dev = None
+        self._controller = None
+
+
+    @property
+    def id(self): return self.model.id
+
+
+    @property
+    def name(self): return self.model.name
+
+
+    @property
+    def mac_addr(self): return self.model.mac_addr
 
 
     @abstractmethod
@@ -31,17 +45,43 @@ class Device(ABC):
 
     def get_power(self):
         # This function must return on | off
-        return self.power
+        return self.model.state.power
 
 
     def get_switch_power(self):
-        return 'on' if self.power == 'off' else 'off'
+        return 'on' if self.model.state.power == 'off' else 'off'
 
 
-    def set_state(self, data):
-        for k, v in data.items():
-            if k in self.__dict__:
-                self.__dict__[k] = v
+    @property
+    def dev(self): return self._dev
+
+
+    @dev.setter
+    def dev(self, d): self._dev = d
+
+
+    @property
+    def controller(self): return self._controller
+
+
+    @controller.setter
+    def controller(self, ctrl): self._controller = ctrl
+
+
+
+
+    def update(self, **data):
+        try:
+            self.model.update(**data)
+        except Exception as e:
+            raise e
+
+
+    def set_state(self, **data):
+        try:
+            self.model.state.update(state=data)
+        except Exception as e:
+            print(f'syncing failed: {e}')
 
 
     def is_on(self):
@@ -56,7 +96,7 @@ class Device(ABC):
 
 
     def on_power_changed(self, new_state):
-        self.power = new_state
+        self.set_state(power=new_state)
 
 
     def get_actions(self):

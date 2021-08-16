@@ -1,14 +1,14 @@
 from .light import Light
 import yeelight
-
+from pysmarthome.models import RgbLightModel
 
 class Yeelight(Light):
-    def __init__(self, addr, **kwargs):
-        super().__init__(**kwargs)
+    model_class = RgbLightModel
+
+
+    def on_load(self, addr='', **data):
         self.dev = yeelight.Bulb(addr)
-        self.power = self.get_power()
-        self.color = self.get_color()
-        self.brightness = self.get_brightness()
+        super().on_load(**data)
 
 
     def on(self):

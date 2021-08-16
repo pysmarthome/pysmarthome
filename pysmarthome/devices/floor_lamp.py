@@ -1,17 +1,16 @@
 from .light import Light
 from .broadlink import BroadlinkDevice
+from pysmarthome.models import BroadlinkRgbLightModel
 
 class FloorLamp(BroadlinkDevice, Light):
-    def __init__(self, manager, commands={}, **kwargs):
-        BroadlinkDevice.__init__(self, manager, commands)
-        Light.__init__(self, **kwargs)
+    model_class = BroadlinkRgbLightModel
 
 
     def on(self):
-        self.send_data(self.commands['on'])
+        self.send_command('on')
         return True
 
 
     def off(self):
-        self.send_data(self.commands['off'])
+        self.send_command('off')
         return True
