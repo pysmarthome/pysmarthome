@@ -30,8 +30,16 @@ class GoveeLedStrip(Light):
         return self.dev.color
 
 
+    def set_color(self, rgb):
+        pass
+
+
     def get_brightness(self):
         return self.dev.brightness
+
+
+    def set_brightness(self):
+        pass
 
 
     def get_power(self):

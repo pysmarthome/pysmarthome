@@ -1,15 +1,20 @@
+from abc import ABC, abstractmethod
 from .device import Device
 
-class Light(Device):
-    def __init__(self, color='#ffffff', brightness=100, **kwargs):
-        super().__init__(**kwargs)
-        self.color = color
-        self.brightness = brightness
+class Light(Device, ABC):
+    def get_color(self):
+        return self.model.state.color
 
 
-    def set_rgb_color(self, rgb):
+    def get_brightness(self):
+        return self.model.state.brightness
+
+
+    @abstractmethod
+    def set_color(self, rgb):
         pass
 
 
+    @abstractmethod
     def set_brightness(self):
         pass

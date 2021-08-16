@@ -28,6 +28,14 @@ class Yeelight(Light):
         return properties['current_brightness']
 
 
+    def set_brightness(self):
+        pass
+
+
+    def set_color(self):
+        pass
+
+
     def get_color(self):
         properties = self.dev.get_properties()
         rgb = properties['rgb']

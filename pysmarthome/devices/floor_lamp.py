@@ -14,3 +14,11 @@ class FloorLamp(BroadlinkDevice, Light):
     def off(self):
         self.send_command('off')
         return True
+
+
+    def set_brightness(self):
+        pass
+
+
+    def set_color(self):
+        pass
