@@ -9,6 +9,7 @@ setup(
     install_requires=[
         'asyncio',
         'broadlink',
+        'Cerberus',
         'flask',
         'flask_restful',
         'govee_api2',
