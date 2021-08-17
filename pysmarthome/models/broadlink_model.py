@@ -9,7 +9,11 @@ class BroadlinkCommands(Model):
         'commands': {
             'type': 'dict',
             'valuesrules': {
-                'type': 'string',
+                'type': 'dict',
+                'schema': {
+                    'name': { 'type': 'string' },
+                    'data': { 'type': 'string' },
+                },
             },
         }
     }
@@ -18,7 +22,13 @@ class BroadlinkCommands(Model):
 
     def get(self, id):
         if id in self.commands:
-            return base64.b64decode(self.commands[id])
+            return base64.b64decode(self.commands[id]['data'])
+        return None
+
+
+    def name(self, id):
+        if id in self.commands:
+            return self.commands[id]['name']
         return None
 
 
