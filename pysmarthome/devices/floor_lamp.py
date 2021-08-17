@@ -20,5 +20,8 @@ class FloorLamp(BroadlinkDevice, Light):
         pass
 
 
-    def set_color(self):
-        pass
+    def set_color(self, color_id):
+        self.send_command(color_id)
+        color = self.model.commands.hex(color_id)
+        self.set_state(color=color)
+        return True
