@@ -38,15 +38,20 @@ class Model:
     def set_attrs(self, **data):
         if not data: return {}
         attrs = self.schema_attrs
-        try:
-            self.validate(attrs | data)
-        except Exception as e:
-            raise e
         updated = {}
         for k, v in data.items():
-            if k not in attrs or v != attrs[k]:
+            if type(v) == dict and k in attrs:
+                updated_dict = attrs[k] | v
+                if updated_dict != attrs[k]:
+                    updated[k] = updated_dict
+            elif k not in attrs or v != attrs[k]:
                 updated[k] = v
-                setattr(self, k, v)
+        try:
+            self.validate(attrs | updated)
+        except Exception as e:
+            raise e
+        for k, v in updated.items():
+            setattr(self, k, v)
         return updated
 
 
