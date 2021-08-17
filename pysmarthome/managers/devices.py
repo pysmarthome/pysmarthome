@@ -23,6 +23,7 @@ class DevicesManager:
         'govee': GoveeManager,
         'broadlink': BroadlinkManager,
     }
+    ref_ids = {}
 
 
     def __init__(self, db):
@@ -66,15 +67,22 @@ class DevicesManager:
             ctrl.add_device(dev)
 
 
+    def create_device(self, **data):
+        pass
+
+
     def add_device(self, dev):
         self.devices[dev.id] = dev
+        self.ref_ids[dev.name] = dev.id
 
 
     def add_controller(self, ctrl):
         self.controller_apis[ctrl.name] = ctrl
 
 
-    def get_device(self, id):
+    def get_device(self, id='', name=''):
+        if name and name in self.ref_ids:
+            return self.devices[self.ref_ids[name]]
         if id in self.devices:
             return self.devices[id]
         return None
