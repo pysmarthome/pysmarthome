@@ -136,7 +136,7 @@ class Device(ABC):
         return actions
 
 
-    def trigger_action(self, action_id, **params):
+    def trigger_action(self, action_id, *params):
         try:
             actions = self.get_actions()
             if action_id in ['on', 'off', 'toggle']:
@@ -148,7 +148,7 @@ class Device(ABC):
                 else:
                     return False
             if action_id in actions:
-                actions[action_id](self, **params)
+                actions[action_id](self, *params)
             return True
         except:
             return False
