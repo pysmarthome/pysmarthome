@@ -69,3 +69,6 @@ class BroadlinkRgbLightModel(BroadlinkDeviceModel, RgbLightModel):
         **BroadlinkDeviceModel.schema
     }
     state_model = RgbLightStateModel
+    children_model_classes = DeviceModel.children_model_classes | {
+        'commands': BroadlinkRgbLightCommands,
+    }
