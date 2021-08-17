@@ -36,6 +36,26 @@ class BroadlinkCommands(Model):
         self.commands[id] = data
 
 
+class BroadlinkRgbLightCommands(BroadlinkCommands):
+    schema = BroadlinkCommands.schema
+    schema['commands']['valuesrules']['schema'] |= {
+        'hex': { 'type': 'string' },
+    }
+
+
+    def hex(self, id):
+        if id in self.commands:
+            return self.commands[id]['hex']
+        return None
+
+
+    def colors(self):
+        return dict([(k, {
+            'name': v['name'],
+            'hex': v['hex'],
+        }) for k, v in self.commands.items() if 'hex' in v])
+
+
 class BroadlinkDeviceModel(DeviceModel):
     schema = DeviceModel.schema
     children_model_classes = DeviceModel.children_model_classes | {
