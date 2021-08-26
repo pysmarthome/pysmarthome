@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 def get_base_classes(cls):
     r = [cls]
     for b in cls.__bases__:
@@ -20,3 +23,6 @@ def update_dict_fields(fields, **fields_mapping):
         if k in fields_mapping:
             updated_fields[k] = fields_mapping[k]
     return updated_fields
+
+
+def clone(d): return deepcopy(d)
