@@ -5,10 +5,13 @@ class DeviceStateModel(Model):
         **Model.schema,
         'state': {
             'type': 'dict',
+            'default': {},
+            'required': True,
             'schema': {
                 'power': {
                     'type':  'string',
                     'allowed': ['on', 'off'],
+                    'default': 'off',
                     'required': True
                 },
             }
