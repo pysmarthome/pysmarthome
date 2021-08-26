@@ -55,8 +55,15 @@ class Model:
         return updated
 
 
-    def validate(self, data):
-        v = Validator(self.schema, **self.validation_opts)
+    @classmethod
+    def normalize(cls, data):
+        v = Validator(cls.schema, **cls.validation_opts)
+        return v.normalized(data)
+
+
+    @classmethod
+    def validate(cls, data):
+        v = Validator(cls.schema, **cls.validation_opts)
         if not v.validate(data):
             raise Exception(v.errors)
 
