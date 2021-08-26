@@ -1,5 +1,5 @@
 from cerberus import Validator
-from pysmarthome.utils import update_dict_fields
+from pysmarthome.utils import update_dict_fields, clone
 import uuid
 
 
