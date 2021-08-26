@@ -46,10 +46,15 @@ class Model:
                     updated[k] = updated_dict
             elif k not in attrs or v != attrs[k]:
                 updated[k] = v
+        resulting_attrs = attrs | updated
         try:
-            self.validate(attrs | updated)
+            self.validate(resulting_attrs)
         except Exception as e:
             raise e
+        resulting_attrs = self.normalize(resulting_attrs)
+        defaults_appended = dict(filter(lambda a: a[0] not in attrs and
+            a[0] not in updated, resulting_attrs.items()))
+        updated |= defaults_appended
         for k, v in updated.items():
             setattr(self, k, v)
         return updated
