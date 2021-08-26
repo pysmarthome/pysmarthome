@@ -1,5 +1,6 @@
 from cerberus import Validator
 from pysmarthome.utils import update_dict_fields
+import uuid
 
 
 class Model:
@@ -7,6 +8,7 @@ class Model:
         'id': {
             'type': 'string',
             'required': True,
+            'default_setter': lambda _: str(uuid.uuid4())
         }
     }
     collection = ''
