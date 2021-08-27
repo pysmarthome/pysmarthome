@@ -1,10 +1,11 @@
 from .light import Light
+from pysmarthome.managers.govee import GoveeManager
 from pysmarthome.models import GoveeModel
 
 
 class GoveeLedStrip(Light):
-    controller_api = 'govee'
     model_class = GoveeModel
+    manager_class = GoveeManager
 
 
     def on(self):
