@@ -1,9 +1,12 @@
 from .device import Device
 from pysmarthome.models import BroadlinkDeviceModel
+from pysmarthome.managers.broadlink import BroadlinkManager
+
 
 class BroadlinkDevice(Device):
     model_class = BroadlinkDeviceModel
-    controller_api = 'broadlink'
+    manager_class = BroadlinkManager
+
 
     def get_command_data(self, id):
         return self.model.commands.get(id)
