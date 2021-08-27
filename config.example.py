@@ -11,6 +11,8 @@ collections = {
     'states': 'device_states',
 }
 
+ping_cmd = 'fping -c1 -t100'
+
 config = {
     'port': 5000,
     'db': {
