@@ -1,22 +1,19 @@
 from abc import ABC, abstractmethod
-from ..utils import get_base_classes, get_methods_in
+from pysmarthome.utils import get_base_classes, get_methods_in
 from pysmarthome.models import DeviceModel
+from ..controller import Controller
 
 
-class Device(ABC):
+class Device(Controller, ABC):
     model_class = DeviceModel
     controller_api = ''
     manager_class = None
 
 
     def __init__(self):
-        self.model = self.model_class()
+        super().__init__()
         self._dev = None
         self._controller = None
-
-
-    @property
-    def id(self): return self.model.id
 
 
     @property
@@ -25,6 +22,10 @@ class Device(ABC):
 
     @property
     def mac_addr(self): return self.model.mac_addr
+
+
+    @property
+    def state(self): return self.model.state
 
 
     @abstractmethod
@@ -61,24 +62,6 @@ class Device(ABC):
     def dev(self, d): self._dev = d
 
 
-    @property
-    def controller(self): return self._controller
-
-
-    @controller.setter
-    def controller(self, ctrl): self._controller = ctrl
-
-
-    @classmethod
-    def load(cls, db, id, on_load_callback=lambda x: None):
-        dev = cls()
-        dev.model = dev.model_class.load(db, id)
-        on_load_callback(dev)
-        d = dev.model.to_dict()
-        dev.on_load(**d)
-        return dev
-
-
     def on_load(self, **data):
         if self.manager_class:
             self.manager_class.add_device(self)
@@ -98,20 +81,8 @@ class Device(ABC):
         self.set_state(**state)
 
 
-
-
-    def update(self, **data):
-        try:
-            self.model.update(**data)
-        except Exception as e:
-            raise e
-
-
     def set_state(self, **data):
-        try:
-            self.model.state.update(state=data)
-        except Exception as e:
-            print(f'syncing failed: {e}')
+        self.model.state.update(state={**data})
 
 
     def is_on(self):
