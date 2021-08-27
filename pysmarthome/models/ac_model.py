@@ -16,3 +16,4 @@ class AcModel(BroadlinkDeviceModel):
     collection = collections['acs']
     children_model_classes = clone(BroadlinkDeviceModel.children_model_classes)
     children_model_classes |= { 'state': { 'class': AcStateModel } }
+    children_model_classes['collection_ref']['attrs'] = collection

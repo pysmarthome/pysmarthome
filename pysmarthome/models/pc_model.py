@@ -40,3 +40,4 @@ class PcModel(DeviceModel):
     collection = collections['pcs']
     children_model_classes = clone(DeviceModel.children_model_classes)
     children_model_classes |= { 'actions': { 'class': PcActions } }
+    children_model_classes['collection_ref']['attrs'] = collection

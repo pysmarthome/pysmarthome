@@ -15,3 +15,4 @@ class TvModel(BroadlinkDeviceModel):
     collection = collections['tvs']
     children_model_classes = clone(BroadlinkDeviceModel.children_model_classes)
     children_model_classes |= { 'state': { 'class': TvStateModel } }
+    children_model_classes['collection_ref']['attrs'] = collection

@@ -1,6 +1,8 @@
 collections = {
+    'configs_ref': 'configs_ref',
     'govee_config': 'govee_config',
     'broadlink_config': 'broadlink_config',
+    'devices_ref': 'devices_ref',
     'acs': 'acs',
     'broadlink_lamps': 'broadlink_lamps',
     'govee': 'govee',

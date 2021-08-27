@@ -73,3 +73,4 @@ class BroadlinkRgbLightModel(BroadlinkDeviceModel, RgbLightModel):
         'commands': { 'class': BroadlinkRgbLightCommands },
         'state': { 'class': RgbLightStateModel },
     }
+    children_model_classes['collection_ref']['attrs'] = collection
