@@ -1,4 +1,5 @@
 from .model import Model
+from pysmarthome.config import collections
 
 class DeviceStateModel(Model):
     schema = {
@@ -17,7 +18,7 @@ class DeviceStateModel(Model):
             }
         }
     }
-    collection = 'devices_states'
+    collection = collections['states']
 
 
 class DeviceModel(Model):
@@ -45,5 +46,4 @@ class DeviceModel(Model):
         'mac_addr': { 'type': 'string' },
         'api_key': { 'type': 'string' },
     }
-    collection = 'devices'
     children_model_classes = { 'state':  DeviceStateModel }
