@@ -111,6 +111,15 @@ class Model:
 
 
     @classmethod
+    def load_one(cls, db):
+        try:
+            data = db.get_one(cls.collection)
+            return cls.load_from_data(db, **data)
+        except Exception as e:
+            raise e
+
+
+    @classmethod
     def create(cls, db, **data):
         try:
             m = cls.create_from_data(db, **data)
