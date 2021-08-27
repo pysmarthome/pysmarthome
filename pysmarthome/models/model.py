@@ -109,6 +109,17 @@ class Model:
             raise e
 
 
+    @classmethod
+    def delete(cls, db, id):
+        try:
+            db.delete(id, cls.collection)
+            for k, model_cls in cls.children_models_classes.items():
+                model_cls.delete(db, id)
+            return True
+        except Exception as e:
+            raise e
+
+
     def append_child(self, id, model):
         if id not in self.children_model_classes:
             raise Exception('not in children models')
