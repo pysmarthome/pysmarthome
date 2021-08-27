@@ -121,3 +121,13 @@ class s3db(db):
             loop.run_in_executor(None, self.put_s3_object, filename, data)
         except Exception as e:
             raise e
+
+
+    def delete(self, id, c_id):
+        try:
+            filename = self.collection_files_ref[c_id]
+            collections = self.get_collections(filename)
+            del collections[id]
+            self.store_collections(filename, collections)
+        except Exception as e:
+            raise e

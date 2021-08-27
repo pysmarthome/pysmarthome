@@ -13,3 +13,8 @@ class db(ABC):
     @abstractmethod
     def create(self, collection_id, **data):
         pass
+
+
+    @abstractmethod
+    def delete(self, collection_id, id):
+        pass
