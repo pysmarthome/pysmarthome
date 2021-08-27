@@ -1,5 +1,6 @@
+from pysmarthome.config import collections
 from .device_model import DeviceModel
-from .model import Model
+from .model import Model, clone
 
 
 class PcActions(Model):
@@ -8,6 +9,7 @@ class PcActions(Model):
             'type': 'dict',
             'allow_unknown': {
                 'type': 'dict',
+                'default': {},
                 'schema': {
                     'name': { 'type': 'string' },
                     'path': { 'type': 'string' },
@@ -16,7 +18,7 @@ class PcActions(Model):
             },
         },
     }
-    collection = 'pc_actions'
+    collection = collections['pc_actions']
 
 
     def get(self, id):
@@ -26,7 +28,7 @@ class PcActions(Model):
 
 
 class PcModel(DeviceModel):
-    schema = DeviceModel.schema | {
+    schema = clone(DeviceModel.schema) | {
         'actions_handler': {
             'type': 'dict',
             'schema': {
@@ -35,6 +37,6 @@ class PcModel(DeviceModel):
             },
         },
     }
-    children_model_classes = DeviceModel.children_model_classes | {
-        'actions': PcActions
-    }
+    collection = collections['pcs']
+    children_model_classes = clone(DeviceModel.children_model_classes)
+    children_model_classes |= { 'actions': { 'class': PcActions } }
