@@ -1,14 +1,17 @@
 import broadlink
-from .api_controller import ApiController
+from .manager import Manager
 
-class BroadlinkManager(ApiController):
-    def init_client(self, addr='', **config):
+
+class BroadlinkManager(Manager):
+    @classmethod
+    def init_client(cls, addr='', **config):
         print('Syncing with broadlink')
-        self.client = broadlink.discover(
+        i = cls.instance
+        i.client = broadlink.discover(
             timeout=2,
             discover_ip_address=addr,
         )[0]
-        self.client.auth()
+        i.client.auth()
         print('Auth!')
 
 
