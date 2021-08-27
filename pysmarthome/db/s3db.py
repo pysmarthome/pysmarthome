@@ -1,11 +1,11 @@
-from .db import DB
+from .db import db
 import json
 import os
 import asyncio
 import boto3
 import bson
 
-class s3db(DB):
+class s3db(db):
     encodings = {
         'bson': {
             'loader': bson.loads,

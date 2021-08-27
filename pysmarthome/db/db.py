@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class DB(ABC):
+class db(ABC):
     @abstractmethod
     def get(self, id, collection_id):
         pass
