@@ -6,6 +6,7 @@ from pysmarthome.models import DeviceModel
 class Device(ABC):
     model_class = DeviceModel
     controller_api = ''
+    manager_class = None
 
 
     def __init__(self):
@@ -79,6 +80,8 @@ class Device(ABC):
 
 
     def on_load(self, **data):
+        if self.manager_class:
+            self.manager_class.add_device(self)
         self.sync_state()
 
 
