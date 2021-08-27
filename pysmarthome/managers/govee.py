@@ -1,16 +1,19 @@
 from govee_api2 import api
-from .api_controller import ApiController
+from .manager import Manager
 
 
-class GoveeManager(ApiController):
+class GoveeManager(Manager):
     ref_ids = {}
 
-    def init_client(self, email='', password='', **config):
+
+    @classmethod
+    def init_client(cls, email='', password='', **config):
+        i = cls.instance
         print('Login on govee API')
-        self._client = api.Govee(email, password)
-        self._client.login()
-        self._client.on_device_update = self.on_device_update
-        self._client.update_device_list()
+        i.client = api.Govee(email, password)
+        i.client.login()
+        i.client.on_device_update = i.on_device_update
+        i.client.update_device_list()
 
 
     def on_device_update(self, client, client_dev, raw_data):
@@ -44,7 +47,3 @@ class GoveeManager(ApiController):
         if id in self.client.devices:
             return self.client.devices[id]
         return None
-
-
-    def get_client_devices(self):
-        return self.client.devices
