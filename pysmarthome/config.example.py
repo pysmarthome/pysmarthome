@@ -19,6 +19,7 @@ ping_cmd = 'fping -c1 -t100'
 
 config = {
     'port': 5000,
+    'host': '0.0.0.0',
     'api_key': '',
     's3db': {
         'bucket_name': 'pysmarthome',

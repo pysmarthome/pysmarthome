@@ -20,7 +20,3 @@ def before_request():
 @app.teardown_request
 def teardown_request(exception):
     g.pop('db', None)
-
-
-def run_server(host='0.0.0.0', port=5000, **config):
-    app.run(host=host, port=port)
