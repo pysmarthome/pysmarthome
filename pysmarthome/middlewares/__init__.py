@@ -1,1 +1,1 @@
-from .middleware import register_middleware
+from .auth import register_middlewares

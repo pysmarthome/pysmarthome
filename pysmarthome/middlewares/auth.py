@@ -1,9 +1,8 @@
 from flask import Request, Response
 import json
-import os
 
 
-class Middleware:
+class Auth:
     def __init__(self, app, api_key):
         self.app = app
         self.api_key = api_key
@@ -24,6 +23,5 @@ class Middleware:
         return self.app(env, start_response)
 
 
-def register_middleware(app):
-    api_key = os.getenv('PYSMARTHOME_API_KEY')
-    app.wsgi_app = Middleware(app.wsgi_app, api_key)
+def register_middlewares(app):
+    app.wsgi_app = Auth(app.wsgi_app, app.config['API_KEY'])
