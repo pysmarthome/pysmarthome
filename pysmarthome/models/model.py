@@ -92,10 +92,31 @@ class Model:
 
 
     @classmethod
+    def create_from_data(cls, db, **data):
+        m = cls(db, **data)
+        for k, child in cls.children_model_classes.items():
+            attrs = child['attrs'] if 'attrs' in child else {}
+            child = child['class'].create(db, id=m.id, **attrs)
+            m.append_child(k, child)
+        return m
+
+
+    @classmethod
     def load(cls, db, id):
         try:
             data = db.get(id, cls.collection)
             return cls.load_from_data(db, **data)
+        except Exception as e:
+            raise e
+
+
+    @classmethod
+    def create(cls, db, **data):
+        try:
+            m = cls.create_from_data(db, **data)
+            data = m.to_dict()
+            db.create(cls.collection, **data)
+            return m
         except Exception as e:
             raise e
 
