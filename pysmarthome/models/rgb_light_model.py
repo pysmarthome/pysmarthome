@@ -1,3 +1,4 @@
+from pysmarthome.config import collections
 from .device_model import DeviceModel, DeviceStateModel, clone
 
 class RgbLightStateModel(DeviceStateModel):
@@ -12,5 +13,11 @@ class RgbLightModel(DeviceModel):
     schema = clone(DeviceModel.schema)
     children_model_classes = clone(DeviceModel.children_model_classes)
     children_model_classes |= { 'state': { 'class': RgbLightStateModel } }
+
+
+class YeelightModel(RgbLightModel):
+    collection = collections['yeelights']
+    children_model_classes = clone(RgbLightModel.children_model_classes)
+    children_model_classes['collection_ref']['attrs'] = collection
 
 

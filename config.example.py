@@ -4,6 +4,7 @@ collections = {
     'pcs': 'pcs',
     'sonoffs': 'sonoffs',
     'tvs': 'tvs',
+    'yeelights': 'yeelights',
     'broadlink_commands': 'broadlink_commands',
     'pc_actions': 'pc_actions',
     'states': 'device_states',
