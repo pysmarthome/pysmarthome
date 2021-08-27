@@ -6,14 +6,12 @@ from ..controller import Controller
 
 class Device(Controller, ABC):
     model_class = DeviceModel
-    controller_api = ''
     manager_class = None
 
 
     def __init__(self):
         super().__init__()
         self._dev = None
-        self._controller = None
 
 
     @property
