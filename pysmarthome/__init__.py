@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['API_KEY'] = config['api_key']
 db = s3db(config['s3db'])
 register_middlewares(app)
+register_endpoints(app)
 
 
 @app.before_request
