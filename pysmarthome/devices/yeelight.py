@@ -1,9 +1,9 @@
 from .light import Light
 import yeelight
-from pysmarthome.models import RgbLightModel
+from pysmarthome.models import YeelightModel
 
 class Yeelight(Light):
-    model_class = RgbLightModel
+    model_class = YeelightModel
 
 
     def on_load(self, addr='', **data):
