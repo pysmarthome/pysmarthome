@@ -1,6 +1,5 @@
 from flask import Flask, g
 
-from .managers import DevicesManager
 from .middlewares import register_middlewares
 from .endpoints import register_endpoints
 from .db import s3db
@@ -23,6 +22,4 @@ def teardown_request(exception):
 
 
 def run_server(host='0.0.0.0', port=5000, **config):
-    devices_manager = DevicesManager(db)
-
     app.run(host=host, port=port)
