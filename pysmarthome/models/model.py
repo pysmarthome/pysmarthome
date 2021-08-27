@@ -83,14 +83,19 @@ class Model:
 
 
     @classmethod
+    def load_from_data(cls, db, **data):
+        m = cls(db, **data)
+        for k, child in cls.children_model_classes.items():
+            child = child['class'].load(db, id=m.id)
+            m.append_child(k, child)
+        return m
+
+
+    @classmethod
     def load(cls, db, id):
         try:
             data = db.get(id, cls.collection)
-            m = cls(db, **data)
-            for k, model_cls in cls.children_model_classes.items():
-                child = model_cls.load(db, id)
-                m.append_child(k, child)
-            return m
+            return cls.load_from_data(db, **data)
         except Exception as e:
             raise e
 
