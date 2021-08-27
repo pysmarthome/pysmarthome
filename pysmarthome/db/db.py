@@ -7,6 +7,10 @@ class db(ABC):
         pass
 
     @abstractmethod
+    def get_one(self, collection_id):
+        pass
+
+    @abstractmethod
     def update(self, id, collection_id, **data):
         pass
 

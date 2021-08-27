@@ -123,6 +123,16 @@ class s3db(db):
             raise e
 
 
+    def get_one(self, c_id):
+        print('db get one')
+        try:
+            filename = self.collection_files_ref[c_id]
+            documents = self.get_collections(filename)[c_id]
+            return list(documents.values())[0]
+        except Exception as e:
+            raise e
+
+
     def delete(self, id, c_id):
         try:
             filename = self.collection_files_ref[c_id]
