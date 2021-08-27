@@ -4,7 +4,7 @@ import json
 from .device import Device
 import os
 from pysmarthome.models import PcModel
-
+from pysmarthome.config import ping_cmd
 
 class Pc(Device):
     model_class = PcModel
@@ -20,7 +20,7 @@ class Pc(Device):
 
     def get_power(self):
         addr = self.model.addr
-        return 'off' if os.system(f'ping -w 1 {addr} &>/dev/null') else 'on'
+        return 'off' if os.system(f'{ping_cmd} {addr} &>/dev/null') else 'on'
 
 
     def dispatch(self, action_id=''):

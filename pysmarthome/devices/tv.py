@@ -1,7 +1,7 @@
 from .broadlink import BroadlinkDevice
 import os
 from pysmarthome.models import TvModel
-
+from pysmarthome.config import ping_cmd
 
 class Tv(BroadlinkDevice):
     model_class = TvModel
@@ -48,4 +48,4 @@ class Tv(BroadlinkDevice):
 
     def get_power(self):
         addr = self.model.addr
-        return 'off' if os.system(f'ping -w 1 {addr} &>/dev/null') else 'on'
+        return 'off' if os.system(f'{ping_cmd} {addr} &>/dev/null') else 'on'
