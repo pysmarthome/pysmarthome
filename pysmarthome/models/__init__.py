@@ -1,5 +1,6 @@
 from .ac_model import AcModel
 from .api_configs import ApiConfigModel
+from .manager_configs_model import BroadlinkConfigModel
 from .broadlink_model import BroadlinkDeviceModel, BroadlinkRgbLightModel
 from .device_model import DeviceModel, SonoffModel
 from .pc_model import PcModel

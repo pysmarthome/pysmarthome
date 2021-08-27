@@ -1,4 +1,5 @@
 collections = {
+    'broadlink_config': 'broadlink_config',
     'acs': 'acs',
     'broadlink_lamps': 'broadlink_lamps',
     'govee': 'govee',
