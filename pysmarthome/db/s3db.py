@@ -5,47 +5,7 @@ import asyncio
 import boto3
 import bson
 
-
 class s3db(DB):
-    def __init__(self, bucket_name='', collection_names={}, enc='json'):
-        self.bucket_name = bucket_name
-        self.enc = enc
-        self.collection_names = collection_names
-        self.collections = {}
-        self.s3 = boto3.client('s3')
-        self.load_collections()
-
-
-    ### DO IT ASYNC!!! ###
-    def load_collections(self):
-        objs = self.s3.list_objects(Bucket=self.bucket_name)['Contents']
-        split_exts = map(lambda o: os.path.splitext(o['Key']), objs)
-        enc_filtered = filter(lambda s: s[1][1:] == self.enc, split_exts)
-
-        for name, _ in enc_filtered:
-            self.collections[name] = S3Collection(name, self.bucket_name, self.enc)
-            self.collections[name].load_documents()
-
-
-    def get(self, id, collection_id):
-        try:
-            return self.collections[collection_id].get(id)
-        except Exception as e:
-            raise e
-
-
-    def update(self, id, collection_id, **data):
-        try:
-            return self.collections[collection_id].set(id, **data)
-        except Exception as e:
-            raise e
-
-
-    def create(self, collection_id, **data):
-        raise NotImplementedError('Not implemented')
-
-
-class S3Collection:
     encodings = {
         'bson': {
             'loader': bson.loads,
@@ -57,43 +17,107 @@ class S3Collection:
         },
     }
 
-    def __init__(self, name, bucket_name, enc='json'):
-        self.bucket_name = bucket_name
-        self._name = name
-        self.enc = enc
-        self.s3 = boto3.client('s3')
-        self.filename = f'{self.name}.{self.enc}'
+    def __init__(self, config):
+        configs = {
+            'bucket_name': '',
+            'collection_files': { 'root': 'root' },
+            'encoding': 'json',
+            'cache': True,
+            **config,
+        }
 
-    @property
-    def name(self): return self._name
+        self.cache = configs['cache']
+        self.bucket_name = configs['bucket_name']
+        self.encoding = configs['encoding']
+        self.collection_files = configs['collection_files']
+
+        self.collection_files_ref = {}
+        for filename, collections in self.collection_files.items():
+            for collection_id in collections:
+                self.collection_files_ref[collection_id] = filename
+
+        self.updated_files = []
+        self.cached_files = {}
+
+        self.aws_credentials = {}
+        if 'aws_secret_access_key' in configs and \
+            configs['aws_secret_access_key'] != '' and \
+            'aws_access_key_id' in configs and \
+            configs['aws_access_key_id'] != '':
+            self.aws_credentials = {
+                'aws_secret_access_key': configs['aws_secret_access_key'],
+                'aws_access_key_id': configs['aws_access_key_id'],
+            }
+
+        self.s3 = boto3.client('s3', **self.aws_credentials)
 
 
-    @property
-    def documents(self): return self._documents.values()
+    def put_s3_object(self, filename, data):
+        data = self.encodings[self.encoding]['dumper'](data)
+        self.s3.put_object(Body=data, Bucket=self.bucket_name, Key=filename)
 
 
-    @documents.setter
-    def documents(self, docs): self._documents = docs
+    def get_s3_object(self, filename):
+        print('s3 get!')
+        data = self.s3.get_object(Bucket=self.bucket_name, Key=filename)['Body']
+        return self.encodings[self.encoding]['loader'](data.read())
 
 
-    def load_documents(self):
-        body = self.s3.get_object(Bucket=self.bucket_name, Key=self.filename)['Body']
-        self._documents = self.encodings[self.enc]['loader'](body.read())
-
-
-    def get(self, id):
+    def get(self, id, c_id):
+        print('db get')
         try:
-            return self._documents[id]
+            filename = self.collection_files_ref[c_id]
+            return self.get_collections(filename)[c_id][id]
         except Exception as e:
-            print(e)
+            raise e
 
 
-    def set(self, id, **data):
+    def update(self, id, c_id, **data):
         try:
-            for k, v in data.items():
-                self._documents[id][k] = v
-            data = self.encodings[self.enc]['dumper'](self._documents)
-            ### do it ASYNC!!! ###
-            self.s3.put_object(Body=data, Bucket=self.bucket_name, Key=self.filename)
+            filename = self.collection_files_ref[c_id]
+            collections = self.get_collections(filename)
+            if id not in collections[c_id]:
+                collections[c_id][id] = { 'id': id }
+            items = data.items()
+            updated = 0
+            for k, v in items:
+                if v != collections[c_id][id][k]:
+                    collections[c_id][id][k] = v
+                    updated += 1
+            if updated:
+                self.store_collections(filename, collections)
+        except Exception as e:
+            raise e
+
+
+    def create(self, c_id, **data):
+        try:
+            id = data.pop('id')
+            self.update(id, c_id, **data)
+        except Exception as e:
+            raise e
+
+
+    def get_collections(self, filename):
+        try:
+            filename += f'.{self.encoding}'
+            print(filename)
+            if self.cache:
+                if filename not in self.cached_files:
+                    self.cached_files[filename] = self.get_s3_object(filename)
+                print('get from cache :)')
+                return self.cached_files[filename]
+            return self.get_s3_object(filename)
+        except Exception as e:
+            raise e
+
+
+    def store_collections(self, filename, data):
+        filename += f'.{self.encoding}'
+        try:
+            print('s3 put object (cached_files none)!')
+            asyncio.set_event_loop(asyncio.SelectorEventLoop())
+            loop = asyncio.get_event_loop()
+            loop.run_in_executor(None, self.put_s3_object, filename, data)
         except Exception as e:
             raise e
