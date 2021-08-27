@@ -1,13 +1,15 @@
 import base64
 from .model import Model
-from .device_model import DeviceModel
+from .device_model import DeviceModel, clone
 from .rgb_light_model import RgbLightModel, RgbLightStateModel
+from pysmarthome.config import collections
 
 class BroadlinkCommands(Model):
     schema = {
         **Model.schema,
         'commands': {
             'type': 'dict',
+            'default': {},
             'valuesrules': {
                 'type': 'dict',
                 'schema': {
@@ -17,7 +19,7 @@ class BroadlinkCommands(Model):
             },
         }
     }
-    collection = 'broadlink_commands'
+    collection = collections['broadlink_commands']
 
 
     def get(self, id):
@@ -37,7 +39,7 @@ class BroadlinkCommands(Model):
 
 
 class BroadlinkRgbLightCommands(BroadlinkCommands):
-    schema = BroadlinkCommands.schema
+    schema = clone(BroadlinkCommands.schema)
     schema['commands']['valuesrules']['schema'] |= {
         'hex': { 'type': 'string' },
     }
@@ -57,18 +59,17 @@ class BroadlinkRgbLightCommands(BroadlinkCommands):
 
 
 class BroadlinkDeviceModel(DeviceModel):
-    schema = DeviceModel.schema
-    children_model_classes = DeviceModel.children_model_classes | {
-        'commands': BroadlinkCommands
+    schema = clone(DeviceModel.schema)
+    children_model_classes = clone(DeviceModel.children_model_classes) | {
+        'commands': { 'class': BroadlinkCommands },
     }
 
 
 class BroadlinkRgbLightModel(BroadlinkDeviceModel, RgbLightModel):
-    schema = {
-        **RgbLightModel.schema,
-        **BroadlinkDeviceModel.schema
-    }
-    state_model = RgbLightStateModel
-    children_model_classes = DeviceModel.children_model_classes | {
-        'commands': BroadlinkRgbLightCommands,
+    schema = clone(RgbLightModel.schema) | clone(BroadlinkDeviceModel.schema)
+    collection = collections['broadlink_lamps']
+    children_model_classes = clone(BroadlinkDeviceModel.children_model_classes)
+    children_model_classes |= {
+        'commands': { 'class': BroadlinkRgbLightCommands },
+        'state': { 'class': RgbLightStateModel },
     }
