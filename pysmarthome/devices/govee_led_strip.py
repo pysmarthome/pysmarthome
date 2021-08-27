@@ -1,10 +1,10 @@
 from .light import Light
-from pysmarthome.models import RgbLightModel
+from pysmarthome.models import GoveeModel
 
 
 class GoveeLedStrip(Light):
-    model_class = RgbLightModel
     controller_api = 'govee'
+    model_class = GoveeModel
 
 
     def on(self):
