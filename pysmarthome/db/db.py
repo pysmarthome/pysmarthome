@@ -11,6 +11,10 @@ class db(ABC):
         pass
 
     @abstractmethod
+    def get_all(self, collection_id):
+        pass
+
+    @abstractmethod
     def update(self, id, collection_id, **data):
         pass
 
