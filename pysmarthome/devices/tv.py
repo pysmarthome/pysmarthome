@@ -30,19 +30,21 @@ class Tv(BroadlinkDevice):
         self.set_state(mute=not self.model.state.mute)
 
 
-    def vol_up(self):
-        if self.model.state.volume < 100:
-            self.send_command('vol_up')
-            self.set_state(volume=self.model.state.volume + 1)
-            return True
-        return False
+    def vol_to(self, f):
+        self.vol(int(f) - self.model.state.volume)
 
 
-    def vol_down(self):
-        if self.model.state.volume > 0:
-            self.send_command('vol_down')
-            self.set_state(volume=self.model.state.volume - 1)
+    def vol(self, n=0, delta=0):
+        curr_vol = self.model.state.volume + delta
+        n = int(n)
+        if (n > 0 and curr_vol < 100) or (n < 0 and curr_vol > 0):
+            cmd = 'vol_up' if n > 0 else 'vol_down'
+            self.send_command(cmd)
+            inc = 1 if n > 0 else -1
+            self.vol(n - inc, delta + inc)
             return True
+        if delta:
+            self.set_state(volume=curr_vol)
         return False
 
 
