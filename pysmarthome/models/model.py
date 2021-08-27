@@ -120,6 +120,18 @@ class Model:
 
 
     @classmethod
+    def load_all(cls, db):
+        try:
+            data = db.get_all(cls.collection)
+            models = []
+            for entry in data:
+                models.append(cls.load_from_data(db, **entry))
+            return models
+        except Exception as e:
+            raise e
+
+
+    @classmethod
     def create(cls, db, **data):
         try:
             m = cls.create_from_data(db, **data)
