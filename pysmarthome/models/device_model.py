@@ -1,5 +1,5 @@
-from .model import Model
 from pysmarthome.config import collections
+from .model import Model, clone
 
 class DeviceStateModel(Model):
     schema = {
@@ -47,3 +47,8 @@ class DeviceModel(Model):
         'api_key': { 'type': 'string' },
     }
     children_model_classes = { 'state':  DeviceStateModel }
+
+
+class SonoffModel(DeviceModel):
+    collection = collections['sonoffs']
+    children_model_classes = clone(DeviceModel.children_model_classes)
