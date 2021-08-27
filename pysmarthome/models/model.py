@@ -171,11 +171,6 @@ class Model:
 
     def to_dict(self, **fields_mapping):
         try:
-            attrs = self.schema_attrs
-            updated_fields = update_dict_fields(attrs, **fields_mapping)
-            self.validate(updated_fields)
-            for child in self.children_models.values():
-                updated_fields |= child.to_dict(**fields_mapping)
-            return updated_fields
+            return self.schema_attrs
         except Exception as e:
             print(e)
