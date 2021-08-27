@@ -1,6 +1,7 @@
 collections = {
     'acs': 'acs',
     'broadlink_lamps': 'broadlink_lamps',
+    'govee': 'govee',
     'pcs': 'pcs',
     'sonoffs': 'sonoffs',
     'tvs': 'tvs',

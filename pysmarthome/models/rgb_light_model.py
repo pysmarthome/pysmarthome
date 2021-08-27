@@ -21,3 +21,7 @@ class YeelightModel(RgbLightModel):
     children_model_classes['collection_ref']['attrs'] = collection
 
 
+class GoveeModel(RgbLightModel):
+    collection = collections['govee']
+    children_model_classes = clone(RgbLightModel.children_model_classes)
+    children_model_classes['collection_ref']['attrs'] = collection
