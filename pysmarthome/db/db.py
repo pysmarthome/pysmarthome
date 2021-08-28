@@ -1,28 +1,31 @@
-from abc import ABC, abstractmethod
+from s3db import s3db
+from vesla_pymvc import DB
 
 
-class db(ABC):
-    @abstractmethod
+class db(DB):
+    @staticmethod
+    def init(config):
+        return s3db(config)
+
     def get(self, id, collection_id):
-        pass
+        return s3db.get(id, collection_id)
 
-    @abstractmethod
+
     def get_one(self, collection_id):
-        pass
+        return s3db.get_one(id, collection_id)
 
-    @abstractmethod
+
     def get_all(self, collection_id):
-        pass
+        return s3db.get_all(collection_id)
 
-    @abstractmethod
+
     def update(self, id, collection_id, **data):
-        pass
+        s3db.update(id, collection_id, **data)
 
-    @abstractmethod
+
     def create(self, collection_id, **data):
-        pass
+        s3db.create(collection_id, **data)
 
 
-    @abstractmethod
-    def delete(self, collection_id, id):
-        pass
+    def delete(self, id, collection_id):
+        s3db.delete(id, collection_id)

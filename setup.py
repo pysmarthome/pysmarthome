@@ -8,12 +8,12 @@ setup(
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
         'asyncio',
-        'boto3',
         'broadlink',
         'flask',
         'flask_restful',
         'govee_api2',
         'requests',
+        's3db',
         'sonoffreq',
         'vesla_pymvc',
         'wakeonlan',

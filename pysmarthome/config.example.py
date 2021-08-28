@@ -21,7 +21,7 @@ config = {
     'port': 5000,
     'host': '0.0.0.0',
     'api_key': '',
-    's3db': {
+    'db': {
         'bucket_name': 'pysmarthome',
         'encoding': 'json',
         'aws_access_key_id': '',
