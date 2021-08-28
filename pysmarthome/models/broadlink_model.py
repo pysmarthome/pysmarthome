@@ -1,6 +1,6 @@
 import base64
-from .model import Model
-from .device_model import DeviceModel, clone
+from vesla_pymvc import Model, clone
+from .device_model import DeviceModel
 from .rgb_light_model import RgbLightModel, RgbLightStateModel
 from pysmarthome.config import collections
 

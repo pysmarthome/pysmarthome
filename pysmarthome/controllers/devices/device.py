@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from pysmarthome.utils import get_base_classes, get_methods_in
 from pysmarthome.models import DeviceModel
-from ..controller import Controller
+from vesla_pymvc import Controller
 
 
 class Device(Controller, ABC):

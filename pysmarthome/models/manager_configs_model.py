@@ -1,4 +1,4 @@
-from .model import Model, clone
+from vesla_pymvc import Model, clone
 from .refs import ManagerConfigsRefModel
 from pysmarthome.config import collections
 

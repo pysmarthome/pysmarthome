@@ -1,6 +1,6 @@
 from pysmarthome.config import collections
 from .device_model import DeviceModel
-from .model import Model, clone
+from vesla_pymvc import Model, clone
 
 
 class PcActions(Model):

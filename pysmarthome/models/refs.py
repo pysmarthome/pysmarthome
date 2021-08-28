@@ -1,5 +1,5 @@
 from pysmarthome.config import collections
-from .model import Model
+from vesla_pymvc import Model
 
 
 class RefModel(Model):
