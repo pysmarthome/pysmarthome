@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='pysmarthome_lib',
     description='A python lib that abstracts pysmarthome entities',
-    version='0.1.2',
+    version='0.1.3',
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
