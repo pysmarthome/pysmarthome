@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='pysmarthome_broadlink',
     description='Broadlink plugin for pysmarthome',
-    version='1.0.0',
+    version='1.0.1',
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[

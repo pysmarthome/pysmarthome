@@ -7,6 +7,7 @@ class TvStatesModel(DeviceStatesModel):
         'volume': { 'type': 'integer', 'min': 0, 'max': 100, 'default': 0 },
         'mute': { 'type': 'boolean', 'default': False },
     }
+    collection = DeviceStatesModel.collection
 
 
 class TvsModel(BroadlinkDevicesModel):

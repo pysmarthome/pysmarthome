@@ -40,6 +40,7 @@ class BroadlinkRgbLampCommands(BroadlinkCommandsModel):
     schema['commands']['valuesrules']['schema'] |= {
         'hex': { 'type': 'string' },
     }
+    collection = BroadlinkCommandsModel.collection
 
 
     def hex(self, id):
