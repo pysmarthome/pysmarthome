@@ -8,6 +8,7 @@ class RgbLampStatesModel(DeviceStatesModel):
         'color': { 'type': 'string', 'default': '#ffffff' },
         'brightness': { 'type': 'number', 'default': 0 },
     }
+    collection = DeviceStatesModel.collection
 
 
 class RgbLampsModel(DevicesModel):
