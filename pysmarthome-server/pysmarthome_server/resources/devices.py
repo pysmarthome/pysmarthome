@@ -1,7 +1,7 @@
 from flask import request, g
 from flask_restful import Resource
 import json
-from pysmarthome.factories.devices_factory import DevicesFactory
+from ..factories.devices_factory import DevicesFactory
 
 class DevicesResource(Resource):
     def get(self, id=''):
