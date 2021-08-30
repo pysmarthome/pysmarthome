@@ -14,7 +14,8 @@ class PluginController(Controller):
 
     def on_load(self, module_name='', **data):
         self.module = importlib.import_module(module_name)
-        self.module.on_load(**data['config'])
+        if 'on_load' in list(self.module.__dict__.keys()):
+            self.module.on_load(**data['config'])
 
 
     def install(self):
