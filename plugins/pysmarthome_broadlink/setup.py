@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pysmarthome_broadlink',
+    name='pysmarthome-broadlink',
     description='Broadlink plugin for pysmarthome',
-    version='1.0.1',
+    version='1.0.2',
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
