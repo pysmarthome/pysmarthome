@@ -7,9 +7,8 @@ class PluginsModel(Model):
             'type': 'string',
             'required': True,
         },
-        'url': {
-            'type': 'string',
-        },
+        'version': { 'type': 'string' },
+        'description': { 'type': 'string' },
         'config': {
             'type': 'dict',
             'default': {},

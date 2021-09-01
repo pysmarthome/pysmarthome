@@ -8,6 +8,7 @@ setup(
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
         'vesla_pymvc',
+        'bs4',
     ],
     packages=find_packages(),
     url='https://github.com/filipealvesdef/pysmarthome/tree/master/pysmarthome-lib',
