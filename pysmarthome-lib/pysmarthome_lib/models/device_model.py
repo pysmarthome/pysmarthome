@@ -1,5 +1,4 @@
 from vesla_pymvc import Model
-from .refs_model import RefModel
 
 
 class DeviceStatesModel(Model):
@@ -35,5 +34,4 @@ class DevicesModel(Model):
     }
     children_model_classes = {
         'state':  { 'class': DeviceStatesModel },
-        'collection_ref': { 'class': RefModel.clone('DevicesRefModel') },
     }
