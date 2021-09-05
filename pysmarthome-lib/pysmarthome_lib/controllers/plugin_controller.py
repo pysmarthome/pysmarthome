@@ -16,7 +16,3 @@ class PluginController(Controller):
         self.module = importlib.import_module(module_name)
         if 'on_load' in list(self.module.__dict__.keys()):
             self.module.on_load(**data['config'])
-
-
-    def install(self):
-        pass
