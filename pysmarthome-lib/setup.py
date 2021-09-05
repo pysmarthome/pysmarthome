@@ -7,7 +7,7 @@ setup(
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
-        'vesla_pymvc',
+        'vesla_pymvc>=2.0.0',
         'bs4',
     ],
     packages=find_packages(),

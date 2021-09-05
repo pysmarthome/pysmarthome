@@ -122,8 +122,8 @@ class PluginManager:
             if id not in db_ids:
                 print(id + ' is not installed!')
                 continue
-            PluginController.delete(PluginManager.db, id)
             p = PluginManager.plugins[id]
+            p.delete()
             print(f'Uninstalling ' + p.module_name)
             subprocess.run(['pip', 'uninstall', '-y', '-q', p.module_name])
         callback_func()
