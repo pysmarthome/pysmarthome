@@ -8,6 +8,11 @@ class PluginController(Controller):
     @property
     def device_controller_classes(self): return self.module.device_controllers
 
+
+    @property
+    def module_name(self): return self.model.module_name
+
+
     def __init__(self):
         self.module = None
 
