@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from functools import reduce
 import re
 import requests
 import subprocess
@@ -100,7 +101,9 @@ class PluginManager:
 
 
     @staticmethod
-    def install(plugins_data, callback_func=lambda: None):
+    def install(*plugin_names, callback_func=lambda: None):
+        query = reduce(lambda x, y: f'{x}|{y}', plugin_names)
+        plugins_data = PluginManager.search(query=query)
         installed = [p['module_name'] for p in PluginManager.get_installed()]
         for data in plugins_data:
             if 'module_name' not in data or data['module_name'] in installed:
