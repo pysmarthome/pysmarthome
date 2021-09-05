@@ -7,7 +7,7 @@ class DevicesFactory:
     @staticmethod
     def init(plugins):
         for plugin in plugins:
-            controller_classes = plugin.device_controllers
+            controller_classes = plugin.device_controller_classes
             for v in controller_classes:
                 k = v.model_class.collection
                 DevicesFactory.collections_map[k] = v

@@ -6,7 +6,7 @@ class PluginController(Controller):
     model_class = PluginsModel
 
     @property
-    def device_controllers(self): return self.module.device_controllers
+    def device_controller_classes(self): return self.module.device_controllers
 
     def __init__(self):
         self.module = None
