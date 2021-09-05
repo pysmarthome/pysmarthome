@@ -11,6 +11,8 @@ app.config['API_KEY'] = config['api_key']
 register_middlewares(app)
 conn = db.init(config['db'])
 plugins = PluginController.load_all(conn)
+for p in plugins:
+    p.init()
 DevicesFactory.init(plugins)
 register_endpoints(app)
 
