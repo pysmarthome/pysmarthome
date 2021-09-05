@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import re
 import requests
 import subprocess
 import pkg_resources
@@ -84,7 +85,7 @@ class PluginManager:
         for s in snippets:
             name = s.select_one('span[class*="name"]').text
             if name in PluginManager.exclude_list or\
-                (query and name.find(query) == -1):
+                (query and not re.match(query, name)):
                 continue
 
             description = s.select_one('p[class*="description"]').text
