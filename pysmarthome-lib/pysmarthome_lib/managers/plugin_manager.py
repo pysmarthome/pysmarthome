@@ -127,3 +127,8 @@ class PluginManager:
             print(f'Uninstalling ' + p.module_name)
             subprocess.run(['pip', 'uninstall', '-y', '-q', p.module_name])
         callback_func()
+
+
+    @staticmethod
+    def get_controllers(plugin_id):
+        return PluginManager.plugins[plugin_id].controllers
