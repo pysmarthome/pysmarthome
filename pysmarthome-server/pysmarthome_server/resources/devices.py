@@ -1,17 +1,16 @@
 from flask import request, g
 from flask_restful import Resource
 import json
-from ..factories.devices_factory import DevicesFactory
 
 class DevicesResource(Resource):
     def get(self, id=''):
         if id:
-            return DevicesFactory.load(g.db, id).to_dict()
-        return [ d.to_dict() for d in DevicesFactory.load_all(g.db) ]
+            return g.dev_controllers[id].to_dict()
+        return [ d.to_dict() for d in g.dev_controllers.values() ]
 
 
     def post(self, id):
-        dev = DevicesFactory.load(g.db, id)
+        dev = g.dev_controllers[id]
         res = {
             'status': 400,
             'body': ''
