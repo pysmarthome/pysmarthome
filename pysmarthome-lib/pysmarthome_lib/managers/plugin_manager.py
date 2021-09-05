@@ -32,6 +32,7 @@ class PluginManager:
         for plugin in plugins:
             plugin.init()
             cls.plugins[plugin.id] = plugin
+        return PluginManager.get_controllers()
 
 
     @staticmethod
@@ -130,5 +131,10 @@ class PluginManager:
 
 
     @staticmethod
-    def get_controllers(plugin_id):
-        return PluginManager.plugins[plugin_id].controllers
+    def get_controllers(plugin_id=''):
+        if plugin_id:
+            return PluginManager.plugins[plugin_id].controllers
+        controllers = {}
+        for plugin in PluginManager.plugins.values():
+            controllers |= plugin.controllers
+        return controllers
