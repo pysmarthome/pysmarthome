@@ -1,4 +1,4 @@
-from vesla_pymvc import Model
+from durc import Model
 
 
 class DeviceStatesModel(Model):

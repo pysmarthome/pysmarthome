@@ -1,5 +1,5 @@
 from s3db import s3db
-from vesla_pymvc import DB
+from durc import DB
 
 
 class db(DB):

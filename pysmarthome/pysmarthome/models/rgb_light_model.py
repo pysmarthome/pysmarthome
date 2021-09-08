@@ -1,5 +1,5 @@
 from .device_model import DevicesModel, DeviceStatesModel
-from vesla_pymvc import clone
+from durc import clone
 
 
 class RgbLampStatesModel(DeviceStatesModel):

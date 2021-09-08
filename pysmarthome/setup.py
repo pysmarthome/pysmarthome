@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 setup(
     name='pysmarthome',
     description='A python library that aims to provide utilities to implement smart home systems',
-    version='2.0.0',
+    version='2.0.1',
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
-        'vesla_pymvc>=2.0.0',
+        'durc~=2.0',
         'bs4',
         'requests',
     ],
