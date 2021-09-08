@@ -1,7 +1,7 @@
 from flask import Flask, g
 from .middlewares import register_middlewares
 from .endpoints import register_endpoints
-from pysmarthome_lib import PluginManager
+from pysmarthome import PluginManager
 from .db import db
 from .config import config
 

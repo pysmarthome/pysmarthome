@@ -22,5 +22,5 @@ class DevicesModel(Model):
         },
     }
     children_model_classes = {
-        'state':  { 'class': DeviceStatesModel },
+        'state':  { 'class': DeviceStatesModel, 'quantity': '1' },
     }

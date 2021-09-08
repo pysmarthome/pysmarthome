@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pysmarthome_lib',
-    description='A python lib that abstracts pysmarthome entities',
+    name='pysmarthome',
+    description='A python library that aims to provide utilities to implement smart home systems',
     version='2.0.0',
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
@@ -12,6 +12,6 @@ setup(
         'requests',
     ],
     packages=find_packages(),
-    url='https://github.com/filipealvesdef/pysmarthome/tree/master/pysmarthome-lib',
+    url='https://github.com/filipealvesdef/pysmarthome/tree/master/pysmarthome',
     zip_safe=False,
 )
