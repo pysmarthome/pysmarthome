@@ -1,8 +1,11 @@
-from pysmarthome_lib import RgbLampController, RgbLampsModel
+from pysmarthome import RgbLampController, RgbLampsModel
 import yeelight
 
 class YeelightController(RgbLampController):
     model_class = RgbLampsModel.clone('YeelightsModel')
+    model_class.schema |= {
+        'addr': { 'type': 'string' },
+    }
 
 
     def on_load(self, addr='', **data):
