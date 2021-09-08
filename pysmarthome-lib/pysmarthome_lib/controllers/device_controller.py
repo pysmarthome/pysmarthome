@@ -18,10 +18,6 @@ class DeviceController(Controller, ABC):
 
 
     @property
-    def mac_addr(self): return self.model.mac_addr
-
-
-    @property
     def state(self): return self.model.state
 
 

@@ -20,10 +20,6 @@ class DevicesModel(Model):
             'type': 'string',
             'required': True,
         },
-        'addr': { 'type': 'string' },
-        'ping_cmd': { 'type': 'string' },
-        'mac_addr': { 'type': 'string' },
-        'api_key': { 'type': 'string' },
     }
     children_model_classes = {
         'state':  { 'class': DeviceStatesModel },
