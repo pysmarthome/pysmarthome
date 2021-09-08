@@ -9,7 +9,6 @@ setup(
     install_requires=[
         'ariadne',
         'flask',
-        'flask_restful',
         'pysmarthome~=2.0',
         's3db',
     ],
