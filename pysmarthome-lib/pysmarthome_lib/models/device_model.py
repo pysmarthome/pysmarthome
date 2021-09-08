@@ -4,19 +4,12 @@ from vesla_pymvc import Model
 class DeviceStatesModel(Model):
     schema = {
         **Model.schema,
-        'state': {
-            'type': 'dict',
-            'default': {},
-            'required': True,
-            'schema': {
-                'power': {
-                    'type':  'string',
-                    'allowed': ['on', 'off'],
-                    'default': 'off',
-                    'required': True
-                },
-            }
-        }
+        'power': {
+            'type':  'string',
+            'allowed': ['on', 'off'],
+            'default': 'off',
+            'required': True
+        },
     }
 
 

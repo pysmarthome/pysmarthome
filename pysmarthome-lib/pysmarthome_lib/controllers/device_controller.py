@@ -71,7 +71,7 @@ class DeviceController(Controller, ABC):
         # with the 'get_' prefix
         actions = self.get_actions()
         state = {}
-        for k in self.model.state.schema['state']['schema'].keys():
+        for k in self.model.state.schema.keys():
             getter_id = f'get_{k}'
             if getter_id in actions:
                 state[k] = actions[getter_id](self)
@@ -79,7 +79,7 @@ class DeviceController(Controller, ABC):
 
 
     def set_state(self, **data):
-        self.model.state.update(state={**data})
+        self.model.state.update(**data)
 
 
     def is_on(self):
