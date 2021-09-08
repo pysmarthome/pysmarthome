@@ -1,8 +1,12 @@
 import sonoffreq
-from pysmarthome_lib import DeviceController, DevicesModel
+from pysmarthome import DeviceController, DevicesModel
 
 class SonoffDeviceController(DeviceController):
     model_class = DevicesModel.clone('SonoffsModel')
+    model_class.schema |= {
+        'addr': { 'type': 'string' },
+        'api_key': { 'type': 'string' },
+    }
 
 
     def on_load(self, addr='', api_key='', **data):
