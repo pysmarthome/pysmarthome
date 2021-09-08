@@ -1,4 +1,4 @@
-from pysmarthome_lib import DeviceController
+from pysmarthome import DeviceController
 import wakeonlan
 import requests
 import json
