@@ -12,6 +12,6 @@ setup(
         'requests',
     ],
     packages=find_packages(),
-    url='https://github.com/filipealvesdef/pysmarthome/tree/master/pysmarthome',
+    url='https://github.com/filipealvesdef/pysmarthome/',
     zip_safe=False,
 )
