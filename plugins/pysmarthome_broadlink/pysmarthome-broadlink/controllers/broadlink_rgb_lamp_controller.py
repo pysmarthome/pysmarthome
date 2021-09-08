@@ -1,4 +1,4 @@
-from pysmarthome_lib import RgbLampController
+from pysmarthome import RgbLampController
 from .broadlink_controller import BroadlinkDeviceController
 from ..models import BroadlinkRgbLampsModel
 
@@ -22,10 +22,5 @@ class BroadlinkRgbLampController(BroadlinkDeviceController, RgbLampController):
 
     def set_color(self, color_id):
         self.send_command(color_id)
-        color = self.model.commands.hex(color_id)
-        self.set_state(color=color)
+        self.set_state(color=color_id)
         return True
-
-
-    def available_colors(self):
-        return self.model.commands.colors()

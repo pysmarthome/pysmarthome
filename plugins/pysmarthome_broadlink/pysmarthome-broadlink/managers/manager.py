@@ -1,5 +1,5 @@
 import broadlink
-from pysmarthome_lib import Manager
+from pysmarthome import Manager
 
 
 class BroadlinkManager(Manager):
