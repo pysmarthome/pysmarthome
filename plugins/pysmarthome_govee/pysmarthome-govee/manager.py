@@ -1,5 +1,5 @@
 from govee_api2 import api
-from pysmarthome_lib import Manager
+from pysmarthome import Manager
 
 
 class GoveeManager(Manager):
@@ -39,8 +39,8 @@ class GoveeManager(Manager):
 
 
     def on_device_added(self, device):
-        self.ref_ids[device.mac_addr] = device.id
-        device.dev = self.get_client_device(device.mac_addr)
+        self.ref_ids[device.model.mac_addr] = device.id
+        device.dev = self.get_client_device(device.model.mac_addr)
 
 
     def get_client_device(self, id):

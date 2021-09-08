@@ -1,9 +1,12 @@
-from pysmarthome_lib import RgbLampController, RgbLampsModel
+from pysmarthome import RgbLampController, RgbLampsModel
 from .manager import GoveeManager
 
 
 class GoveeLedStripController(RgbLampController):
     model_class = RgbLampsModel.clone('GoveeModel')
+    model_class.schema |= {
+        'mac_addr': { 'type': 'string' }
+    }
     manager_class = GoveeManager
 
 
