@@ -7,5 +7,6 @@ from .models import PluginsModel, RgbLampsModel, RgbLampStatesModel, DevicesMode
 from .models import TvsModel, TvStatesModel
 from .models import AcsModel, AcStatesModel
 from .models import MultiCommandDevicesModel, CommandsModel
+from .models import MultiCommandRgbLampsModel
 from .models import DeviceStatesModel, clone
 from .managers import Manager, PluginManager
