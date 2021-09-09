@@ -20,6 +20,8 @@ class DevicesModel(Model):
             'type': 'string',
             'required': True,
         },
+        'addr': { 'type': 'string', 'default': '' },
+        'power_by_ping': { 'type': 'boolean', 'default': False },
     }
     children_model_classes = {
         'state':  { 'class': DeviceStatesModel, 'quantity': '1' },
