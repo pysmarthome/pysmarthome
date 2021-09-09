@@ -5,3 +5,4 @@ from .plugin_controller import PluginController
 from .tv_controller import TvController
 from .ac_controller import AcController
 from .multi_command_device_controller import MultiCommandDeviceController
+from .multi_command_rgb_lamp_controller import MultiCommandRgbLampController
