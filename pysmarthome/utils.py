@@ -17,6 +17,11 @@ def get_methods_in(*classes):
     return r
 
 
+def hex_to_rgb(hex_code):
+    h = hex_code.lstrip('#')
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+
 def color_dist(a, b):
     dr = b[0] - a[0]
     dg = b[1] - a[1]
