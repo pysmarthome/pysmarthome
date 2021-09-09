@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from ..utils import get_base_classes, get_methods_in
 from ..models import DevicesModel
 from . import Controller
+import os
 
 class DeviceController(Controller, ABC):
     model_class = DevicesModel
@@ -40,6 +41,10 @@ class DeviceController(Controller, ABC):
 
     def get_power(self):
         # This function must return on | off
+        ping = self.model.power_by_ping
+        if self.model.addr and ping:
+            addr = self.model.addr
+            return 'off' if os.system(f'fping -c1 -t100 {addr} &>/dev/null') else 'on'
         return self.model.state.power
 
 
