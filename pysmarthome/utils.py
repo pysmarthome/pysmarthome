@@ -22,6 +22,11 @@ def hex_to_rgb(hex_code):
     return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
 
+def rgb_to_hex(*rgb_components):
+    r, g, b = rgb_components
+    return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
+
 def color_dist(a, b):
     dr = b[0] - a[0]
     dg = b[1] - a[1]
