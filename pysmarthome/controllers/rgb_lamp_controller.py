@@ -16,5 +16,5 @@ class RgbLampController(DeviceController, ABC):
 
 
     @abstractmethod
-    def set_brightness(self):
+    def set_brightness(self, val):
         pass
