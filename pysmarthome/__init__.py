@@ -2,6 +2,7 @@ from .controllers import PluginController, RgbLampController, DeviceController
 from .controllers import Controller
 from .controllers import TvController
 from .controllers import AcController
+from .controllers import MultiCommandDeviceController
 from .models import PluginsModel, RgbLampsModel, RgbLampStatesModel, DevicesModel
 from .models import TvsModel, TvStatesModel
 from .models import AcsModel, AcStatesModel
