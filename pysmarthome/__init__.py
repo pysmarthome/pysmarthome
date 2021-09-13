@@ -11,4 +11,4 @@ from .models import MultiCommandDevicesModel, CommandsModel
 from .models import MultiCommandRgbLampsModel
 from .models import DeviceStatesModel, clone
 from .managers import Manager, PluginManager
-from .utils import hex_to_rgb, rgb_to_hex
+from .utils import hex_to_rgb, rgb_to_hex, int_to_hex_color

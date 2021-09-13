@@ -16,6 +16,9 @@ def get_methods_in(*classes):
         r.extend(methods)
     return r
 
+def int_to_hex_color(int_rgb):
+    return str.format('#{:06x}', int(int_rgb))
+
 
 def hex_to_rgb(hex_code):
     h = hex_code.lstrip('#')
