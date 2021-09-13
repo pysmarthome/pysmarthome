@@ -8,7 +8,7 @@ from ..controllers import PluginController
 
 
 class PluginManager:
-    exclude_list = ['pysmarthome-server', 'pysmarthome-lib']
+    exclude_list = ['pysmarthome-server', 'pysmarthome-lib', 'pysmarthome']
     _db = None
     plugins = {}
 
