@@ -4,6 +4,7 @@ from .controllers import TvController
 from .controllers import AcController
 from .controllers import MultiCommandDeviceController
 from .controllers import MultiCommandRgbLampController
+from durc import Model
 from .models import PluginsModel, RgbLampsModel, RgbLampStatesModel, DevicesModel
 from .models import TvsModel, TvStatesModel
 from .models import AcsModel, AcStatesModel
