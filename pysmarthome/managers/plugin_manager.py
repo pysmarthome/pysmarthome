@@ -112,7 +112,7 @@ class PluginManager:
                 continue
             print(f'Installing ' + data['module_name'])
             p = PluginController.create(PluginManager.db, **data)
-            subprocess.run(['pip', 'install', '-q', p.name])
+            subprocess.run(['pip', 'install', '-q', p.module_name])
         callback_func()
 
 
