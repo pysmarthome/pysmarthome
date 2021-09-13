@@ -1,4 +1,4 @@
-from durc import Model, clone
+from durc import Model
 
 
 class ColorsModel(Model):
