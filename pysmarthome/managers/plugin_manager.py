@@ -102,7 +102,7 @@ class PluginManager:
 
 
     @staticmethod
-    def install(*plugin_names, callback_func=lambda: None):
+    def install(*plugin_names):
         query = reduce(lambda x, y: f'{x}|{y}', plugin_names)
         plugins_data = PluginManager.search(query=query)
         installed = [p['module_name'] for p in PluginManager.get_installed()]
@@ -113,11 +113,10 @@ class PluginManager:
             print(f'Installing ' + data['module_name'])
             p = PluginController.create(PluginManager.db, **data)
             subprocess.run(['pip', 'install', '-q', p.module_name])
-        callback_func()
 
 
     @staticmethod
-    def uninstall(*ids, callback_func=lambda: None):
+    def uninstall(*ids):
         db_ids = [ p.id for p in PluginManager.plugins.values() ]
         for id in ids:
             if id not in db_ids:
@@ -127,7 +126,6 @@ class PluginManager:
             p.delete()
             print(f'Uninstalling ' + p.module_name)
             subprocess.run(['pip', 'uninstall', '-y', '-q', p.module_name])
-        callback_func()
 
 
     @staticmethod
