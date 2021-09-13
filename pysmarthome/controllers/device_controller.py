@@ -121,6 +121,7 @@ class DeviceController(Controller, ABC):
                     return False
             if action_id in actions:
                 actions[action_id](self, *params)
+            self.sync_state()
             return True
         except:
             return False
