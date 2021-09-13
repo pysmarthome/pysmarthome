@@ -1,7 +1,12 @@
 from abc import ABC, abstractmethod
 from .device_controller import DeviceController
+from ..models import RgbLampsModel
+
 
 class RgbLampController(DeviceController, ABC):
+    model_class = RgbLampsModel
+
+
     def get_color(self):
         return self.model.state.color
 
