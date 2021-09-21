@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..utils import get_base_classes, get_methods_in
+from durc.utils import get_base_classes, get_methods_in
 from ..models import DevicesModel
 from . import Controller
 import os
