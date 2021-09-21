@@ -114,6 +114,12 @@ class DeviceController(Controller, ABC):
         return actions
 
 
+    def restore_snapshot_state(self, id):
+        if id not in self.snapshot_states: return False
+        for action in self.snapshot_states[id].actions:
+            self.trigger_action(*action)
+
+
     def trigger_action(self, action_id, *params):
         try:
             actions = self.get_actions()
