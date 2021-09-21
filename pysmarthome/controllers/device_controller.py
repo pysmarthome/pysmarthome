@@ -12,6 +12,7 @@ class DeviceController(Controller, ABC):
     def __init__(self):
         super().__init__()
         self._dev = None
+        self.snapshot_states = {}
 
 
     @property
@@ -64,6 +65,11 @@ class DeviceController(Controller, ABC):
         if self.manager_class:
             self.manager_class.add_device(self)
         self.sync_state()
+
+
+    def after_load(self):
+        for s in self.model.snapshot_states:
+            self.snapshot_states[s.id] = s
 
 
     def sync_state(self):
