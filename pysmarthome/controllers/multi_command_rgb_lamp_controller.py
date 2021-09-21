@@ -10,16 +10,6 @@ class MultiCommandRgbLampController(MultiCommandDeviceController, RgbLampControl
     model_class = MultiCommandRgbLampsModel
 
 
-    def on(self):
-        self.send_command('on')
-        return True
-
-
-    def off(self):
-        self.send_command('off')
-        return True
-
-
     def set_brightness_by(self, n):
         self.set_int_state_attr_by('brightness', n)
 

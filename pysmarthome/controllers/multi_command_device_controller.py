@@ -6,6 +6,16 @@ class MultiCommandDeviceController(DeviceController):
     model_class = MultiCommandDevicesModel
 
 
+    def on(self):
+        self.send_command('on')
+        return True
+
+
+    def off(self):
+        self.send_command('off')
+        return True
+
+
     @abstractmethod
     def send_command(self, id):
         pass
