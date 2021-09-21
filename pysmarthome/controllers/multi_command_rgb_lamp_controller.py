@@ -1,7 +1,6 @@
 from .rgb_lamp_controller import RgbLampController
 from .multi_command_device_controller import MultiCommandDeviceController
 from ..models import MultiCommandRgbLampsModel, CommandsModel
-from ..models import ColorsModel
 from ..utils import rgb_to_hex, hex_to_rgb, color_dist
 from math import inf
 
@@ -23,8 +22,8 @@ class MultiCommandRgbLampController(MultiCommandDeviceController, RgbLampControl
         color_models = []
         for c in self.model.color_commands:
             color_models.append({
-                'ctrl': ColorsModel.load(db, c.color_id),
-                'cmd_id': c.command_id,
+                'ctrl': c.color,
+                'cmd_id': c.command.id,
             })
         if len(color_models) == 0: return False
         if type(target_color) == str: target_color = hex_to_rgb(target_color)
