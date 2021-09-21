@@ -32,3 +32,4 @@ class AcsModel(DevicesModel):
     }
     children_model_classes = clone(DevicesModel.children_model_classes)
     children_model_classes['state']['class'] = AcStatesModel
+    children_model_classes['snapshot_states']['class'] = SnapshotAcStatesModel

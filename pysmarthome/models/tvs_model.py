@@ -36,3 +36,4 @@ class TvsModel(DevicesModel):
     }
     children_model_classes = clone(DevicesModel.children_model_classes)
     children_model_classes['state']['class'] = TvStatesModel
+    children_model_classes['snapshot_states']['class'] = SnapshotTvStatesModel

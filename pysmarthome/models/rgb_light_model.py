@@ -33,3 +33,4 @@ class RgbLampsModel(DevicesModel):
     schema = clone(DevicesModel.schema)
     children_model_classes = clone(DevicesModel.children_model_classes)
     children_model_classes['state']['class'] = RgbLampStatesModel
+    children_model_classes['snapshot_states']['class'] = SnapshotRgbLampStatesModel

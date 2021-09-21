@@ -42,4 +42,12 @@ class DevicesModel(Model):
     }
     children_model_classes = {
         'state':  { 'class': DeviceStatesModel, 'quantity': '1' },
+        'snapshot_states': {
+            'class': SnapshotStatesModel,
+            'quantity': '+',
+            'init': [
+                '806c82753115f6ffaaf13a5fc668a869',
+                '96c0413caa3ebdd60370a712476863cb',
+            ],
+        },
     }
