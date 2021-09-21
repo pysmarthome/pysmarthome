@@ -126,6 +126,8 @@ class DeviceController(Controller, ABC):
                 else:
                     return False
             if action_id in actions:
+                if not self.is_on():
+                    self.on() and self.on_power_changed('on')
                 actions[action_id](self, *params)
             self.sync_state()
             return True
