@@ -8,6 +8,7 @@ from durc import Model
 from .models import PluginsModel, RgbLampsModel, RgbLampStatesModel, DevicesModel
 from .models import TvsModel, TvStatesModel
 from .models import AcsModel, AcStatesModel
+from .models import ScenesModel
 from .models import MultiCommandDevicesModel, CommandsModel
 from .models import MultiCommandRgbLampsModel
 from .models import DeviceStatesModel, clone
