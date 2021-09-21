@@ -7,7 +7,7 @@ class PluginsModel(Model):
             'type': 'string',
             'required': True,
         },
-        #'activated': { 'type': 'bool',  'default': True, 'required': True },
+        'active': { 'type': 'boolean',  'default': True, 'required': True },
         'version': { 'type': 'string' },
         'description': { 'type': 'string' },
         'config': {
