@@ -7,7 +7,7 @@ setup(
     author='Filipe Alves',
     author_email='filipe.alvesdefernando@gmail.com',
     install_requires=[
-        'durc',
+        'durc>=3.1.0',
         'bs4',
         'requests',
     ],
