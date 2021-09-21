@@ -1,4 +1,4 @@
-from .device_model import DevicesModel, DeviceStatesModel
+from .device_model import DevicesModel, DeviceStatesModel, SnapshotStatesModel
 from durc import clone
 
 
@@ -7,6 +7,22 @@ class AcStatesModel(DeviceStatesModel):
         'temp': { 'type': 'integer', 'default': 16 },
     }
     collection = DeviceStatesModel.collection
+
+
+class SnapshotAcStatesModel(SnapshotStatesModel):
+    schema = clone(SnapshotStatesModel.schema) | {
+        'temp': { 'type': 'integer' },
+    }
+    collection = SnapshotStatesModel.collection
+
+
+    @property
+    def actions(self):
+        actions = super().actions
+        attrs = self.attrs
+        if 'temp' in attrs:
+            actions.append(('set_temp_to', self.temp))
+        return actions
 
 
 class AcsModel(DevicesModel):
