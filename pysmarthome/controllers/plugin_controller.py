@@ -23,6 +23,10 @@ class PluginController(Controller):
         self.controllers = {}
 
 
+    def toggle_active(self):
+        self.model.update(active=not self.model.active)
+
+
     def init(self):
         self.module = importlib.import_module(self.module_name)
         if 'on_load' in list(self.module.__dict__.keys()):

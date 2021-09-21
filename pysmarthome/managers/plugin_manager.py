@@ -130,6 +130,13 @@ class PluginManager:
 
 
     @staticmethod
+    def toggle_active(*ids):
+        plugins = [p for p in PluginManager.plugins.values() if p.id in ids]
+        for p in plugins:
+            p.toggle_active()
+
+
+    @staticmethod
     def get_controllers(plugin_id=''):
         if plugin_id:
             return PluginManager.plugins[plugin_id].controllers
