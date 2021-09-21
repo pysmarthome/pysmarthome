@@ -13,6 +13,10 @@ class PluginController(Controller):
     def module_name(self): return self.model.module_name
 
 
+    @property
+    def active(self): return self.model.active
+
+
     def __init__(self):
         self.module = None
         self.ctrl_cls = {}

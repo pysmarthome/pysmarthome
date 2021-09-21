@@ -30,7 +30,8 @@ class PluginManager:
         PluginManager.db = db
         plugins = PluginManager.sync_plugins_with_db()
         for plugin in plugins:
-            plugin.init()
+            if plugin.active:
+                plugin.init()
             cls.plugins[plugin.id] = plugin
         return PluginManager.get_controllers()
 
