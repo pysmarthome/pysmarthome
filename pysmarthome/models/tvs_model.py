@@ -1,4 +1,4 @@
-from .device_model import DevicesModel, DeviceStatesModel, SnapshotStatesModel
+from .device_model import PingableDevicesModel, DeviceStatesModel, SnapshotStatesModel
 from durc import clone
 
 
@@ -29,11 +29,11 @@ class SnapshotTvStatesModel(SnapshotStatesModel):
         return actions
 
 
-class TvsModel(DevicesModel):
-    schema = clone(DevicesModel.schema) | {
+class TvsModel(PingableDevicesModel):
+    schema = clone(PingableDevicesModel.schema) | {
         'volume_max': { 'type': 'integer', 'default': 100 },
         'volume_min': { 'type': 'integer', 'default': 0 },
     }
-    children_model_classes = clone(DevicesModel.children_model_classes)
+    children_model_classes = clone(PingableDevicesModel.children_model_classes)
     children_model_classes['state']['class'] = TvStatesModel
     children_model_classes['snapshot_states']['class'] = SnapshotTvStatesModel

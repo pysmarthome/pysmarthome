@@ -1,4 +1,4 @@
-from .device_model import DevicesModel, DeviceStatesModel
+from .device_model import DevicesModel, DeviceStatesModel, PingableDevicesModel
 from .colors_model import ColorsModel
 from .multi_command_devices_model import MultiCommandDevicesModel, CommandsModel
 from .multi_command_rgb_lamps_model import MultiCommandRgbLampsModel, ColorCommandsModel

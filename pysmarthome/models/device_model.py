@@ -37,8 +37,6 @@ class DevicesModel(Model):
             'type': 'string',
             'required': True,
         },
-        'addr': { 'type': 'string', 'default': '' },
-        'power_by_ping': { 'type': 'boolean', 'default': False },
     }
     children_model_classes = {
         'state':  { 'class': DeviceStatesModel, 'quantity': '1' },
@@ -50,4 +48,11 @@ class DevicesModel(Model):
                 '96c0413caa3ebdd60370a712476863cb',
             ],
         },
+    }
+
+
+class PingableDevicesModel(DevicesModel):
+    schema = clone(Model.schema) | {
+        'addr': { 'type': 'string', 'default': '' },
+        'power_by_ping': { 'type': 'boolean', 'default': False },
     }

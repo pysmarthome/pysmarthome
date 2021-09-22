@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from ..models import TvsModel
-from .device_controller import DeviceController
+from .pingable_device_controller import PingableDeviceController
 
-class TvController(DeviceController):
+class TvController(PingableDeviceController):
     model_class = TvsModel
 
 
