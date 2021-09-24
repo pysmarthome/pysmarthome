@@ -70,7 +70,12 @@ class PluginManager:
         for p in plugins:
             name = p.project_name
             version = p.version
-            metadata = [ m for m in p.get_metadata('PKG-INFO').split('\n')
+            meta_name = 'METADATA'
+            for n in ['METADATA', 'PKG-INFO']:
+                if p.has_metadata(n):
+                    meta_name = n
+                    break
+            metadata = [ m for m in p.get_metadata(meta_name).split('\n')
                 if m.startswith('Summary') ]
             description = metadata.pop().split(': ')[1]
             installed_plugins.append({
